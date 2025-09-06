@@ -1,0 +1,36 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Track A  Home</title>
+  <link rel="stylesheet" href="./static/style.css">
+</head>
+<body>
+  <header>
+    <h1>Track A</h1>
+  </header>
+  <main>
+    <section>
+      <h2>Latest Posts</h2>
+      <ul id="posts"></ul>
+    </section>
+  </main>
+  <script>
+    fetch('./data/posts.json')
+      .then(r => r.json())
+      .then(posts => {
+        const ul = document.getElementById('posts');
+        posts.forEach(p => {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = p.url;
+          a.textContent = p.title;
+          li.appendChild(a);
+          ul.appendChild(li);
+        });
+      })
+      .catch(err => console.error('Failed to load posts.json', err));
+  </script>
+</body>
+</html>
