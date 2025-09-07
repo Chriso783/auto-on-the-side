@@ -33,3 +33,4 @@ def build_posts():
 if __name__ == "__main__":
     update_index()
     build_posts()
+
