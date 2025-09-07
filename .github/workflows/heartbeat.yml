@@ -7,4 +7,12 @@ jobs:
   noop:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "heartbeat"
+      - name: Notify success
+        if: success() && env.TELEGRAM_BOT_TOKEN != '' && env.TELEGRAM_CHAT_ID != ''
+        run: |
+          python scripts/notify.py " Heartbeat SUCCESS: $GITHUB_REPOSITORY  run #$GITHUB_RUN_NUMBER"
+      - name: Notify failure
+        if: failure() && env.TELEGRAM_BOT_TOKEN != '' && env.TELEGRAM_CHAT_ID != ''
+        run: |
+          python scripts/notify.py " Heartbeat FAILURE: $GITHUB_REPOSITORY  run #$GITHUB_RUN_NUMBER"      - run: echo "heartbeat"
+

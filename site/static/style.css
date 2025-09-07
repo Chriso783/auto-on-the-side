@@ -1,7 +1,8 @@
-﻿:root{ --fg:#111; --bg:#fff; --link:#0a66c2; }
+﻿:root { --bg: #0d0f12; --card: #12151a; --text: #e7ebf0; --muted: #9aa7b1; --accent: #6ad1ff; }
 *{ box-sizing:border-box; }
 body{ font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--fg); background:var(--bg); margin:0; padding:2rem; line-height:1.6; }
 h1,h2{ margin:0 0 .75rem 0; }
 ul{ padding-left:1.25rem; }
 a{ color:var(--link); text-decoration:none; }
 a:hover{ text-decoration:underline; }
+
