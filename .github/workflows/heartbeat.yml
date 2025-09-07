@@ -1,18 +1,36 @@
-﻿name: Heartbeat
+name: Heartbeat
 on:
   schedule:
     - cron: "0 0 * * 0"
   workflow_dispatch:
 jobs:
-  noop:
+  heartbeat:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      
+      - name: Run heartbeat
+        run: echo "heartbeat"
+        
       - name: Notify success
-        if: success() && env.TELEGRAM_BOT_TOKEN != '' && env.TELEGRAM_CHAT_ID != ''
+        if: success()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          python scripts/notify.py " Heartbeat SUCCESS: $GITHUB_REPOSITORY  run #$GITHUB_RUN_NUMBER"
+          python scripts/notify.py "✅ Heartbeat SUCCESS: $GITHUB_REPOSITORY run #$GITHUB_RUN_NUMBER"
+          
       - name: Notify failure
-        if: failure() && env.TELEGRAM_BOT_TOKEN != '' && env.TELEGRAM_CHAT_ID != ''
+        if: failure()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          python scripts/notify.py " Heartbeat FAILURE: $GITHUB_REPOSITORY  run #$GITHUB_RUN_NUMBER"      - run: echo "heartbeat"
+          python scripts/notify.py "❌ Heartbeat FAILURE: $GITHUB_REPOSITORY run #$GITHUB_RUN_NUMBER"
 
