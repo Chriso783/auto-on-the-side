@@ -1,3 +1,8 @@
-﻿[
-  { "title": "Welcome", "date": "2025-09-06", "slug": "welcome", "url": "posts/2025-09-06-welcome/" }
+[
+  {
+    "title": "Welcome",
+    "date": "2025-09-06",
+    "slug": "welcome",
+    "url": "posts/2025-09-06-welcome/"
+  }
 ]
